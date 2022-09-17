@@ -10,12 +10,16 @@ import com.jeanlima.mvcapp.model.Estudante;
 @Component
 public class EstudanteServiceImpl implements EstudanteService{
 
+    static int contadorId=0;
+
     public List<Estudante> estudantes = new ArrayList<Estudante>();    
 
     @Override
     public void salvarEstudante(Estudante estudante) {
         System.out.println(estudante.toString());
         try{
+            estudante.setId(contadorId);
+            contadorId++;
             this.estudantes.add(estudante);
         } catch(Exception e){
             e.printStackTrace();
