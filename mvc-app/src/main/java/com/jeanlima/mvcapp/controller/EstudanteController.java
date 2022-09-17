@@ -64,7 +64,7 @@ public class EstudanteController {
 		String curso = request.getParameter("curso");
         List<Estudante> estudantes = estudanteService.getEstudantesBycurso(curso);
         model.addAttribute("estudantes",estudantes);
-		return "estudante/listaEstudantes";
+		return "estudante/listaEstudantesCurso";
 	}
 
     @RequestMapping("/processaFormLinguagem")
@@ -73,7 +73,7 @@ public class EstudanteController {
 		String linguagem = request.getParameter("linguagem");
         List<Estudante> estudantes = estudanteService.getEstudantesByLinguagem(linguagem);
         model.addAttribute("estudantes",estudantes);
-		return "estudante/listaEstudantes";
+		return "estudante/listaEstudantesLinguagem";
 	}
 
     @RequestMapping(value = "/detalhes/{id}")
