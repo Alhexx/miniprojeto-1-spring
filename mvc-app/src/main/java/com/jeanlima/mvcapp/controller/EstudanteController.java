@@ -54,13 +54,11 @@ public class EstudanteController {
     @RequestMapping("/showFormFiltros")
 	public String showFormFiltros(Model model){
         model.addAttribute("estudante", new Estudante());
-        System.out.print("dasdaw");
 		return "estudante/formFiltros";
 	}
 
     @RequestMapping("/processaFormCurso")
 	public String processFormCurso(HttpServletRequest request, Model model){
-        System.out.print(request.getParameter("curso"));
 		String curso = request.getParameter("curso");
         List<Estudante> estudantes = estudanteService.getEstudantesBycurso(curso);
         model.addAttribute("estudantes",estudantes);
@@ -69,7 +67,6 @@ public class EstudanteController {
 
     @RequestMapping("/processaFormLinguagem")
 	public String processFormLinguagem(HttpServletRequest request, Model model){
-        System.out.print(request.getParameter("linguagem"));
 		String linguagem = request.getParameter("linguagem");
         List<Estudante> estudantes = estudanteService.getEstudantesByLinguagem(linguagem);
         model.addAttribute("estudantes",estudantes);
@@ -78,18 +75,14 @@ public class EstudanteController {
 
     @RequestMapping(value = "/detalhes/{id}")
     public String getEstudanteById(@PathVariable String id, Model model) {
-        System.out.println("BORA BB: " + id);
         int paramId = Integer.parseInt(id);
         Estudante estudante = estudanteService.getEstudanteById(paramId);
         model.addAttribute("estudante",estudante);
-        System.out.println("BORA BB: " + estudante);
 		return "estudante/listaEstudanteId";
     }
 
     @RequestMapping(value = "/deletar/{id}")
     public String deleteEstudante(@PathVariable String id, Model model) {
-        
-        System.out.println("BORA BB: " + id);
         int paramId = Integer.parseInt(id);
         Estudante estudante = estudanteService.getEstudanteById(paramId);
         estudanteService.deletarEstudante(estudante);

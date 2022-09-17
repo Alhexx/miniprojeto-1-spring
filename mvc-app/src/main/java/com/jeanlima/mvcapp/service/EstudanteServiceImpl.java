@@ -16,7 +16,6 @@ public class EstudanteServiceImpl implements EstudanteService{
 
     @Override
     public void salvarEstudante(Estudante estudante) {
-        System.out.println(estudante.toString());
         try{
             estudante.setId(contadorId);
             contadorId++;
@@ -51,12 +50,9 @@ public class EstudanteServiceImpl implements EstudanteService{
 
     @Override
     public List<Estudante> getEstudantesBycurso(String curso) {
-        System.out.println("LOAKO");
         List<Estudante> estudantesByCurso = new ArrayList<Estudante>();
         for (Estudante estudante : this.estudantes) {
             if(estudante.getCurso().equalsIgnoreCase(curso)){
-                
-                System.out.println("ACHOW");
                 estudantesByCurso.add(estudante);
             }
         }
