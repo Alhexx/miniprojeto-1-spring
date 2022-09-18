@@ -66,10 +66,17 @@ public class EstudanteController {
 	}
 
     @RequestMapping("/processaFormLinguagem")
-	public String processFormLinguagem(HttpServletRequest request, Model model){
-		String linguagem = request.getParameter("linguagem");
-        List<Estudante> estudantes = estudanteService.getEstudantesByLinguagem(linguagem);
-        model.addAttribute("estudantes",estudantes);
+	public String processFormLinguagem(Model model){
+        List<Estudante> estudantesJavascript = estudanteService.getEstudantesByLinguagem("Javascript");
+        model.addAttribute("estudantesestudantesJavascript",estudantesJavascript);
+        List<Estudante> estudantesJava = estudanteService.getEstudantesByLinguagem("Java");
+        model.addAttribute("estudantesJava",estudantesJava);
+        List<Estudante> estudantesC = estudanteService.getEstudantesByLinguagem("C");
+        model.addAttribute("estudantesC",estudantesC);
+        List<Estudante> estudantesPython = estudanteService.getEstudantesByLinguagem("Python");
+        model.addAttribute("estudantesPython",estudantesPython);
+        int quantLinguagem = estudantesJavascript.size()+estudantesJava.size()+estudantesC.size()+estudantesPython.size();
+        model.addAttribute("quantLinguagem",quantLinguagem);
 		return "estudante/listaEstudantesLinguagem";
 	}
 
