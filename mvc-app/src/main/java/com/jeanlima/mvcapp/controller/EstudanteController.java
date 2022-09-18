@@ -59,7 +59,6 @@ public class EstudanteController {
         int contador = 0;
         Map<String, List<Estudante>> details = new HashMap<>();
         for(String curso : estudanteCurso.getCursos()) {
-            System.out.println(curso);
             details.put(curso, estudanteService.getEstudantesBycurso(curso));
             contador+=estudanteService.getEstudantesBycurso(curso).size();
         }
