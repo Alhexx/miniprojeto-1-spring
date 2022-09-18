@@ -1,6 +1,9 @@
 package com.jeanlima.mvcapp.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,24 +54,25 @@ public class EstudanteController {
 
     }
 
-    @RequestMapping("/showFormFiltros")
-	public String showFormFiltros(Model model){
-        model.addAttribute("estudante", new Estudante());
-		return "estudante/formFiltros";
-	}
-
     @RequestMapping("/processaFormCurso")
-	public String processFormCurso(HttpServletRequest request, Model model){
-		String curso = request.getParameter("curso");
-        List<Estudante> estudantes = estudanteService.getEstudantesBycurso(curso);
-        model.addAttribute("estudantes",estudantes);
+	public String processFormCurso(@ModelAttribute("estudante") Estudante estudanteCurso, Model model){
+        int contador = 0;
+        Map<String, List<Estudante>> details = new HashMap<>();
+        for(String curso : estudanteCurso.getCursos()) {
+            System.out.println(curso);
+            details.put(curso, estudanteService.getEstudantesBycurso(curso));
+            contador+=estudanteService.getEstudantesBycurso(curso).size();
+        }
+        model.addAttribute("quantCursos", contador);
+        model.addAttribute("cursos", estudanteCurso.getCursos());
+        model.addAttribute("estudantesCurso",details);
 		return "estudante/listaEstudantesCurso";
 	}
 
     @RequestMapping("/processaFormLinguagem")
 	public String processFormLinguagem(Model model){
         List<Estudante> estudantesJavascript = estudanteService.getEstudantesByLinguagem("Javascript");
-        model.addAttribute("estudantesestudantesJavascript",estudantesJavascript);
+        model.addAttribute("estudantesJavascript",estudantesJavascript);
         List<Estudante> estudantesJava = estudanteService.getEstudantesByLinguagem("Java");
         model.addAttribute("estudantesJava",estudantesJava);
         List<Estudante> estudantesC = estudanteService.getEstudantesByLinguagem("C");
